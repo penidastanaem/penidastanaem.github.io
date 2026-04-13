@@ -12,6 +12,44 @@
                 return t.hasClass("is-active") ? (t.removeClass("is-active"), n.removeClass("opened"), n.slideUp(500)) : (t.addClass("is-active"), n.addClass("opened"), n.slideDown(500)), !1
             })
         },
+        colorScheme: function() {
+            var n = e(".rewall_fn_color_scheme"),
+                o = n.find(".item"),
+                a = o.length,
+                s = 1,
+                i = Math.ceil(a / 3),
+                r = n.find("[data-color]"),
+                c = n.find(".opener"),
+                l = "--text-color-for-main-bg";
+            t.root.css("--main-color").replace(/\s+/g, "");
+            r.each(function() {
+                e(this).css({
+                    backgroundColor: e(this).attr("data-color")
+                })
+            }), n.find(".current").text(s), n.find(".separator").text("/"), n.find(".total").text(i), o.eq(2).nextAll().addClass("disabled"), n.find(".my__nav a").off().on("click", function() {
+                var t = e(this);
+                s = t.hasClass("next") ? s === i ? 1 : s + 1 : 1 === s ? i : s - 1, o.addClass("disabled");
+                for (var a = 0; a < 3; a++) o.eq(3 * (s - 1) + a).removeClass("disabled");
+                return n.find(".current").text(s), !1
+            }), r.on("click", function() {
+                var n = e(this),
+                    o = n.attr("data-color").replace(/\s+/g, "");
+                return n.hasClass("active") || "" !== o && "#" !== o && (r.removeClass("active"), n.addClass("active"), t.root.css("--main-color", o), o, t.setTextColor(o, l)), !1
+            });
+            c.off().on("click", function(e) {
+                return e.preventDefault(), e.stopPropagation(), n.addClass("opened"), !1
+            }).on("mouseenter", function() {
+                return !1
+            }).on("mouseleave", function() {
+                return !1
+            }), n.find(".closer").off().on("click", function(e) {
+                return e.preventDefault(), e.stopPropagation(), n.removeClass("opened"), !1
+            }), n.find(".color_box").on("click", function(e) {
+                e.preventDefault(), e.stopPropagation()
+            }), e("body").on("click", function() {
+                n.removeClass("opened")
+            })
+        },
         setTextColor: function(e, n) {
             t.returnLuma(e) < 60 ? t.root.css(n, "#fff") : t.root.css(n, "#000")
         },
