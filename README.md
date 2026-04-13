@@ -1,3 +1,3 @@
 # template
 
-https://penidastanaem.github.io/template/
+https://penidastanaem.github.io/
